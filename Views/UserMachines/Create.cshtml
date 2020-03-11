@@ -1,0 +1,50 @@
+﻿@model KisaanMart.Data.Models.UserMachine
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h1>Rent Machine</h1>
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="MachineId" class="control-label"></label>
+                <select asp-for="MachineId" class="form-control" asp-items="ViewBag.MachineId">
+                    <option disabled selected>--- Select Machine ---</option>
+                </select>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AmountPerHour" class="control-label"></label>
+                <input asp-for="AmountPerHour" class="form-control" />
+                <span asp-validation-for="AmountPerHour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AmountPerAcre" class="control-label"></label>
+                <input asp-for="AmountPerAcre" class="form-control" />
+                <span asp-validation-for="AmountPerAcre" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="userId" class="control-label"></label>
+            <select asp-for="userId" class ="form-control" asp-items="ViewBag.userId"></select>
+        </div>*@
+
+            <div class="form-group">
+                <input type="submit" value="Submit Request" class="btn btn-primary" /> 
+            </div>
+            <div class="form-group">
+                
+            </div>
+            
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+    @*<div>
+        <a class="btn btn-info" asp-action="Index">Back to List</a>
+    </div>*@
+

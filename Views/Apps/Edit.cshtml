@@ -1,0 +1,46 @@
+﻿@model KisaanMart.Data.Models.Apps
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Apps</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="AppName" class="control-label"></label>
+                <input asp-for="AppName" class="form-control" />
+                <span asp-validation-for="AppName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppDescription" class="control-label"></label>
+                <input asp-for="AppDescription" class="form-control" />
+                <span asp-validation-for="AppDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppUrl" class="control-label"></label>
+                <input asp-for="AppUrl" class="form-control" />
+                <span asp-validation-for="AppUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppImage" class="control-label"></label>
+                <input asp-for="AppImage" class="form-control" />
+                <span asp-validation-for="AppImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

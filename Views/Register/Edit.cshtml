@@ -1,0 +1,108 @@
+﻿@model KisaanMart.Data.Models.TempUser
+
+@{
+    ViewData["Title"] = "Register User";
+}
+<hr />
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h4>Registration Page</h4>
+        <form asp-action="Edit" asp-controller="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label">User Name</label>
+                <input asp-for="UserName" class="form-control" id="userName" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPhoneNo" class="control-label">Phone Number</label>
+                <input asp-for="UserPhoneNo" class="form-control" placeholder="+91" id="phoneNo" />
+                <span asp-validation-for="UserPhoneNo" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group" style="display:none;">
+                <label asp-for="IsModerator" class="control-label">Is Moderator</label>
+                <input asp-for="IsModerator" type="password" class="form-control pwd" id="phoneNo" />
+                <span asp-validation-for="IsModerator" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="divOTP">
+                <label asp-for="RandOTP" class="control-label">OTP</label>
+                <input asp-for="RandOTP" class="form-control" />
+                @*<input id="userOTP" name="userOTP" class="form-control" />*@
+                <span asp-validation-for="RandOTP" id="RandOTP" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" id="registerSection">
+                <span style="font-weight:bold;">Enter the OTP sent to mobile number and submit to login</span>
+            </div>
+
+
+            @*<div class="form-group" id="OTPSection" display="@TempData["UserSuccess"]!=null">
+            <span style="font-weight:bold">@TempData["Success"]</span>
+            @*<a asp-action="Login" asp-controller="Account" class="btn btn-primary">Click here to login</a>
+        </div>*@
+            <div class="form-group" id="OTPSection">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+            <div class="form-group" id="LatitudeSection" style="display:none">
+                <input asp-for="Latitude" class="form-control" id="Lat" />
+                <span asp-validation-for="Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="LongitudeSection" style="display:none">
+                <input asp-for="Longitude" class="form-control" id="Long" />
+                <span asp-validation-for="Longitude" class="text-danger"></span>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
+
+@section Scripts {
+
+    <script>
+
+        $(document).ready(function () {
+            $("#RandOTP").val(0);
+            navigator.geolocation.getCurrentPosition(showPosition, positionError);
+      
+        });
+
+
+        function showPosition(position) {
+            var coordinates = position.coords;
+            $("#LatitudeSection").show();
+            $("#LongitudeSection").show();
+            $("#Lat").val(coordinates.latitude);
+            $("#Long").val(coordinates.longitude);
+            //$("#LatitudeSection").hide();
+            //$("#LongitudeSection").hide();
+            //setMarkerOnMap(coordinates.latitude, coordinates.longitude)
+        }
+        function positionError(position) { }
+        //function setMarkerOnMap(Lat, Long) {            
+        //    $("#LatitudeSection").show();
+        //    $("#LongitudeSection").show();
+        //    $("#Lat").val(Lat);
+        //    $("#Long").val(Long);
+        //    //$("#LatitudeSection").hide();
+        //    //$("#LongitudeSection").hide();
+        //    //Set the Latitude and Longitude of the Map
+        //    var map = new ol.Map({
+        //        target: 'map',
+        //        layers: [
+        //            new ol.layer.Tile({
+        //                source: new ol.source.OSM()
+        //            })
+        //        ],
+        //        view: new ol.View({
+        //            center: ol.proj.fromLonLat([Long, Lat]),
+        //            zoom: 12
+        //        })
+        //    });
+        //}
+    </script>
+}

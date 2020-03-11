@@ -1,0 +1,124 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model IEnumerable<KisaanMart.Data.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <div>
+        <h1>My Dashboard</h1> 
+    </div>
+    <span class="ml-auto">My Credits: @HttpContextAccessor.HttpContext.Session.GetString("AccumulatedPoints")</span>
+
+
+<h4>Requested Machines</h4>
+<table id="requestedMachineTable" class="table table-light ">
+    <thead style="background-color: slategray;color: white;">
+        <tr>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>No of hours</th>
+            <th>No of acres</th>
+            <th>Total amount to be paid</th>
+        </tr>
+    </thead>
+</table>
+
+<h4>My Machines for rent</h4>
+
+<table id="requestMachineTable" class="table table-light ">
+    <thead style="background-color: slategray;color: white;">
+        <tr>
+            <th>Machine Name</th>
+            <th>Machine Image</th>
+            <th>User Phone No</th>
+            <th>Amount per hour</th>
+            <th>Amount per acre</th>
+        </tr>
+    </thead>
+</table>
+<div class="form-group" id="sectionUserMachineTable">
+
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+               $("#requestedMachineTable").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "paging": false,
+                destroy: true,
+                "ajax": {
+                    "url": "/Transactions/LoadTransactionsForCurrentUser",
+                    "type": "GET",
+                    "datatype": "json"
+
+                },
+                "columnDefs":
+                    [{
+                        //"targets": [0],
+                        //"visible": false,
+                        //"searchable": false
+                    }],
+                "columns": [
+                    { "data": "StartDate" },
+                    { "data": "EndDate" },
+                    { "data": "Noofhours" },
+                    { "data": "Noofacres" },
+                    { "data": "Totalamount" },
+
+
+                ]
+
+            });
+
+            $("#requestMachineTable").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": false, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "paging": false,
+                destroy: true,
+                "ajax": {
+                    "url": "/UserMachines/LoadMachinesForCurrentUser",
+                    "type": "GET",
+                    "datatype": "json"
+
+                },
+                "columnDefs":
+                    [{
+                        //"targets": [0],
+                        //"visible": false,
+                        //"searchable": false
+                    }],
+                "columns": [
+                    { "data": "MachineName" },
+                        {
+                            "render": function (data, type, full, meta) {
+                                return '<img style="width:90px;height:90px;" src="data:image/png;base64,' + full.MachineImage + '">';
+                            }
+                        },
+                    { "data": "UserPhoneNo" },
+                    { "data": "AmountPerHour" },
+                    { "data": "AmountPerAcre" },
+
+
+                ]
+
+            });
+
+
+
+
+
+        });
+
+
+
+    </script>
+}
+

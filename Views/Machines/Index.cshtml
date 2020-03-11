@@ -1,0 +1,101 @@
+﻿@model IEnumerable<KisaanMart.Data.Models.Machine>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <div class="container">
+        <br />
+        <p>
+            <a class="btn btn-info" asp-action="Create">Add New Machine</a>
+        </p>
+        <div style="width:90%; margin:0 auto;">
+            <table id="example" class="table table-light table-striped table-bordered dt-responsive nowrap" cellspacing="0">
+                <thead style="background-color: slategray;color: white;">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Edit Item</th>
+                        <th>Delete Item</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+@section Scripts {
+    <script>
+        $(document).ready(function ()
+        {
+            $("#example").DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "ajax": {
+                    "url": "/Machines/LoadMachineData",
+                    "type": "POST",
+                    "datatype": "json"
+                                      
+                },
+                "columnDefs":
+                [{
+                    //"targets": [0],
+                    //"visible": false,
+                    //"searchable": false
+                }],
+                "columns": [                    
+                    { "data": "MachineName"},
+                    { "data": "MachineDescription" },
+                   {
+                            "render": function (data, type, full, meta) {
+                                return '<img style="width:90px;height:90px;" src="data:image/png;base64,' + full.MachineImage + '">';
+                            }
+                        },
+                    {
+                        "render": function (data, type, full, meta)
+                        { return '<a class="btn btn-info" href="/Machines/Edit/' + full.Id + '">Edit</a>'; }
+                    },
+                    {
+                        data: null, render: function (data, type, row)
+                        {
+                            return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.Id + "'); >Delete</a>" ;
+                                       }
+                                       },
+
+
+                ]
+
+            });
+        });
+
+
+    function DeleteData(MachineID)
+        {
+         if (confirm("Are You sure to delete this record..?")) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Delete", "Machines")',
+           data: { id: MachineID },
+           datatype: 'json',
+           success: function (response) {
+               oTable = $('#example').DataTable();
+               oTable.draw();
+           },
+           error: function (msg) {
+               alert(msg.responseText);
+           }
+       });
+    }
+        }
+
+
+
+    </script>
+}
+
+
+
+
+
+@**@

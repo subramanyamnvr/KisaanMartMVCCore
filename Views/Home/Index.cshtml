@@ -1,0 +1,780 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div>
+    <div style="width: 100%;height:100%">
+
+        <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1500px; height: 480px; overflow: hidden; visibility: hidden;">
+            <!-- Loading Screen -->
+            <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
+                <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+                <div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+            </div>
+            <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1500px; height: 480px; overflow: hidden;">
+                <div data-b="0" data-p="170.00" data-po="80% 55%">
+                    <img data-u="image" src="~/images/imgSlider3Text.jpg" />
+
+                </div>
+
+                <div data-b="1" data-p="170.00" style="display:none;">
+                    <img data-u="image" src="~/images/slider1Text.jpg" />
+
+                </div>
+
+                <div data-b="2" data-p="170.00" style="display:none;">
+                    <img data-u="image" src="~/images/imgSlider2Text.jpg" />
+
+                </div>
+            </div>
+            <!-- Bullet Navigator -->
+            <div data-u="navigator" class="jssorb05" style="bottom:16px;right:16px;" data-autocenter="1">
+                <!-- bullet navigator item prototype -->
+                <div data-u="prototype" style="width:16px;height:16px;"></div>
+            </div>
+            <!-- Arrow Navigator -->
+            <span data-u="arrowleft" class="jssora22l" style="top:0px;left:10px;width:4px;height:58px;" data-autocenter="2"></span>
+            <span data-u="arrowright" class="jssora22r" style="top:0px;right:10px;width:4px;height:58px;" data-autocenter="2"></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    @*User Features*@
+    @if (User.Identity.IsAuthenticated)
+    {
+    <section class="ftco-section  bg-primary">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-2 col-xs-6 col-sm-4 d-flex align-self-stretch  fadeInUp d">
+                    <div class="block-6 services d-block">
+                        <div class="icon">
+                            <a href="/UserMachines/Create"> <img src="~/Images/machinary.png" /></a>
+                        </div>
+                        <div class="media-body">
+                            <h3 class="heading mb-3">Machinery</h3>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-6 col-sm-4 d-flex align-self-stretch  fadeInUp d">
+                    <div class="media block-6 services d-block">
+                        <div class="icon"><a href="/Workers/Index"> <img src="~/Images/workforce.png" /></a></div>
+                        <div class="media-body">
+                            <h3 class="heading mb-3">Work Force</h3>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-6 col-sm-4 d-flex align-self-stretch  fadeInUp d">
+                    <div class="media block-6 services d-block">
+                        <div class="icon">
+                            <a href="/Home/Advisory"> <img src="~/Images/Advisory.jpg" /></a>
+
+                        </div>
+                        <div class="media-body">
+                            <h3 class="heading mb-3">Advisory</h3>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-2 col-xs-6 col-sm-4 d-flex align-self-stretch  fadeInUp d">
+                    <div class="media block-6 services d-block">
+                        <div class="icon"> <a href="/Home/ProcessingUnit"> <img src="~/Images/ProcessingUnit.jfif" /></a></div>
+
+                        <div class="media-body">
+                            <h3 class="heading mb-3">Processing Units</h3>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-6 col-sm-4 d-flex align-self-stretch  fadeInUp d">
+                    <div class="media block-6 services d-block">
+                        <div class="icon">
+                            <a href="/Home/Fertilizer"> <img src="~/Images/Fertilizing.jpg" /></a>
+                        </div>
+                        <div class="media-body">
+                            <h3 class="heading mb-3">Fertilizer</h3>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-6 col-sm-4 d-flex align-self-stretch  fadeInUp d">
+                    <div class="media block-6 services d-block">
+                        <div class="icon">
+
+                            <a href="/Home/SeedTesting"> <img src="~/Images/Seed Testing.png" /></a>
+                        </div>
+                        <div class="media-body">
+                            <h3 class="heading mb-3">Seed Testing</h3>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-2 col-xs-6 col-sm-4 d-flex align-self-stretch  fadeInUp d">
+                    <div class="media block-6 services d-block">
+                        <div class="icon">
+                            <a href="/Home/AgroMarketing"> <img src="~/Images/AgroMar.jpg" /></a>
+                        </div>
+                        <div class="media-body">
+                            <h3 class="heading mb-3">Agro Marketing</h3>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-6 col-sm-4 d-flex align-self-stretch  fadeInUp d">
+                    <div class="media block-6 services d-block">
+                        <div class="icon">
+                            <a href="/Home/StorageUnit"> <img src="~/Images/StorageUnit1.jpg" /></a>
+                        </div>
+                        <div class="media-body">
+                            <h3 class="heading mb-3">Storage Units</h3>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-6 col-sm-4 d-flex align-self-stretch  fadeInUp d">
+                    <div class="media block-6 services d-block">
+                        <div class="icon">
+                            @*<span class="fa fa-instagram"></span>*@
+                            <a href="/Home/CropInsurance">  <img src="~/Images/cropinsur.jpg" /></a>
+                        </div>
+                        <div class="media-body">
+                            <h3 class="heading mb-3">Crop Insurance</h3>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-6 col-sm-4 d-flex align-self-stretch  fadeInUp d">
+                    <div class="media block-6 services d-block">
+                        <div class="icon">
+                            <a href="/Home/PolyhouseFarming"> <img src="~/Images/polyhousing.jpg" /></a>
+
+                        </div>
+                        <div class="media-body">
+                            <h3 class="heading mb-3">Polyhouse Farming</h3>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-6 col-sm-4 d-flex align-self-stretch  fadeInUp d">
+                    <div class="media block-6 services d-block">
+                        <div class="icon">
+
+                            <a href="/Home/SoilTesting"> <img src="~/Images/SoilTesting.jpg" /></a>
+
+                        </div>
+                        <div class="media-body">
+                            <h3 class="heading mb-3">Soil Testing</h3>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-6 col-sm-4 d-flex align-self-stretch  fadeInUp d">
+                    <div class="media block-6 services d-block">
+                        <div class="icon">
+                            <a href="/Home/OrganicFarming"> <img src="~/Images/OrganicForming.jfif" /></a>
+                        </div>
+                        <div class="media-body">
+                            <h3 class="heading mb-3">Organic Farming</h3>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </section>
+    <div>
+
+    </div>
+
+
+    }
+
+    @*Register Section*@
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+    <div class="col-md-12" id="Registerdiv">
+        <section class="ftco-section-1 ftco-no-pt ">
+
+
+            <div class="row">
+
+                <div class="col-md-4 ">
+                    <div class="block-7 active">
+                        <div class="text-center">
+                            <h2 class="heading">I Am Farmer</h2>
+                            @*<span class="price"><sup>$</sup> <span class="number">200</span></span>
+                                <span class="excerpt d-block">per month</span>*@
+
+                            @*<h3 class="heading-2 my-4">Features</h3>*@
+
+                            <ul class="pricing-text">
+                                <li>Request Machinary</li>
+                                <li>Add Machinary</li>
+                                <li> Get help from Moderator</li>
+                                <li> &nbsp;</li>
+                                <li>&nbsp; </li>
+                                <li>&nbsp; </li>
+                                <li> &nbsp;</li>
+                                <li> &nbsp;</li>
+                                <li> &nbsp;</li>
+                            </ul>
+                            <form>
+                                <input type="submit" class="btn btn-primary d-block px-2 py-3" name="Register" asp-action="Create" asp-controller="Register" asp-route-usertype="User" value="REGISTER AS FARMER">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    <div class="block-7 active">
+                        <div class="text-center">
+                            <h2 class="heading">I Am Community Volunteer</h2>
+                            @*<span class="price"><sup>$</sup> <span class="number">200</span></span>
+                                <span class="excerpt d-block">per month</span>*@
+
+                            @*<h3 class="heading-2 my-4">Features</h3>*@
+
+                            <ul class="pricing-text">
+                                <li>Help Farmers</li>
+                                <li>Request Machinary</li>
+                                <li>Add Machinary</li>
+                                <li>Add Work force</li>
+                                <li>
+                                    Contact Marketing
+                                </li>
+                                <li>Connect Advisory</li>                                
+                                <li>Contact Agencies</li>
+                                <li>Contact Corporate</li>
+
+                            </ul>
+                            <form>
+                                <input type="submit" class="btn btn-primary d-block px-2 py-3" name="Register" value="REGISTER AS COMMUNITY VOLUNTEER" asp-action="Create" asp-controller="Register" asp-route-usertype="Moderator" value="Register">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    <div class="block-7 active">
+                        <div class="text-center">
+                            <h2 class="heading">I Am Expert</h2>
+                            @*<span class="price"><sup>$</sup> <span class="number">200</span></span>
+                                <span class="excerpt d-block">per month</span>*@
+
+                            @*<h3 class="heading-2 my-4">Features</h3>*@
+
+                            <ul class="pricing-text">
+                                <li>Help on Soil Testing</li>
+                                <li>Help on Seed Testing</li>
+                                <li>Help on Agro Marketing</li>
+                                <li> &nbsp;</li>
+                                <li>&nbsp; </li>
+                                <li>&nbsp; </li>
+                                <li> &nbsp;</li>
+                                <li> &nbsp;</li>
+                                <li> &nbsp;</li>
+                            </ul>
+                            <form>
+                                <input type="submit" method="get" name="Register" value="REGISTER AS EXPERT" class="btn btn-primary d-block px-2 py-3" asp-action="Create" asp-controller="Register" asp-route-usertype="Moderator" value="Register">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+    }
+
+
+</div>
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+
+        jQuery(document).ready(function ($) {
+
+            var jssor_1_SlideoTransitions = [
+                {$Duration:3000,$Opacity:2},
+                [{ b: -1, d: 1, o: -1 }, { b: 0, d: 1000, x: -257, y: -5, o: 1 }],
+                [{ b: 480, d: 520, x: 120, y: -270 }],
+                [{ b: 1000, d: 500, y: 250 }, { b: 8000, d: 1000, x: 600 }],
+                [{ b: -1, d: 1, o: -1, sX: -0.6, sY: -0.6 }, { b: 1500, d: 500, o: 1, r: 360, sX: 0.6, sY: 0.6 }, { b: 8000, d: 1000, y: -150 }],
+                [{ b: -1, d: 1, o: -1, tZ: -200 }, { b: 2000, d: 1000, o: 1, tZ: 200 }, { b: 3000, d: 1000, o: -1, tZ: 200 }],
+                [{ b: -1, d: 1, o: -1, tZ: -200 }, { b: 3000, d: 1000, o: 1, tZ: 200 }, { b: 4000, d: 1000, o: -1, tZ: 200 }],
+                [{ b: -1, d: 1, o: -1, tZ: -200 }, { b: 4000, d: 1000, o: 1, tZ: 200 }, { b: 5000, d: 1000, o: -1, tZ: 200 }],
+                [{ b: -1, d: 1, o: -1, tZ: -200 }, { b: 5000, d: 1000, o: 1, tZ: 200 }, { b: 6000, d: 1000, o: -1, tZ: 200 }],
+                [{ b: -1, d: 1, o: -1, tZ: -200 }, { b: 6000, d: 1000, o: 1, tZ: 200 }, { b: 7000, d: 1000, o: -1, tZ: 200 }],
+                [{ b: -1, d: 1, o: -1, tZ: -200 }, { b: 7000, d: 1000, o: 1, tZ: 200 }, { b: 8000, d: 1000, o: -1, tZ: 200 }],
+                [{ b: -1, d: 1, c: { x: 250.0, t: -250.0 } }, { b: 0, d: 1000, c: { x: -250.0, t: 250.0 } }, { b: 5000, d: 1000, y: 100 }],
+                [{ b: -1, d: 1, o: -1 }, { b: 1000, d: 1000, o: 1 }, { b: 5000, d: 1000, y: 280 }],
+                [{ b: 2000, d: 1000, y: 190, e: { y: 28 } }, { b: 5000, d: 1000, x: 280 }],
+                [{ b: 3000, d: 520, y: 50 }, { b: 5000, d: 1000, y: -50 }],
+                [{ b: 3520, d: 480, x: -400 }, { b: 5000, d: 800, x: 400, e: { x: 7 } }],
+                [{ b: 4000, d: 500, x: -400 }, { b: 5000, d: 800, x: 400, e: { x: 7 } }],
+                [{ b: 4500, d: 500, x: -400 }, { b: 5000, d: 800, x: 400, e: { x: 7 } }],
+                [{ b: -1, d: 1, c: { x: 250.0, t: -250.0 } }, { b: 0, d: 1000, c: { x: -250.0, t: 250.0 } }, { b: 10000, d: 500, y: 90 }],
+                [{ b: -1, d: 1, c: { x: 150.0, t: -150.0 } }, { b: 1000, d: 1000, c: { x: -150.0, t: 150.0 } }, { b: 10000, d: 500, c: { y: 150.0, m: -150.0 } }],
+                [{ b: 2000, d: 500, x: 220 }],
+                [{ b: 3500, d: 500, rX: -20 }, { b: 4000, d: 1000, rX: 40 }, { b: 5000, d: 500, rX: -10 }, { b: 9500, d: 500, o: -1 }],
+                [{ b: 3500, d: 2000, r: 360 }],
+                [{ b: -1, d: 1, o: -1 }, { b: 2500, d: 500, x: 76, y: -25, o: 1 }],
+                [{ b: -1, d: 1, o: -1 }, { b: 2500, d: 500, x: 47, y: 65, o: 1 }],
+                [{ b: -1, d: 1, o: -1 }, { b: 2500, d: 500, x: -47, y: 65, o: 1 }],
+                [{ b: -1, d: 1, o: -1 }, { b: 2500, d: 500, x: -76, y: -25, o: 1 }],
+                [{ b: -1, d: 1, o: -1 }, { b: 2500, d: 500, y: -80, o: 1 }],
+                [{ b: -1, d: 1, c: { x: 120.0, t: -120.0 } }, { b: 6100, d: 400, c: { x: -120.0, t: 120.0 } }, { b: 10000, d: 500, y: -120 }],
+                [{ b: 6500, d: 500, x: 220 }],
+                [{ b: -1, d: 1, o: -1, r: 180, sX: -0.5, sY: -0.5 }, { b: 7000, d: 500, o: 1, r: 180, sX: 0.5, sY: 0.5 }, { b: 8000, d: 500, o: -1, r: 180, sX: 9, sY: 9 }],
+                [{ b: -1, d: 1, o: -1, r: 180, sX: -0.5, sY: -0.5 }, { b: 8000, d: 500, o: 1, r: 180, sX: 0.5, sY: 0.5 }, { b: 9000, d: 500, o: -1, r: 180, sX: 9, sY: 9 }],
+                [{ b: -1, d: 1, o: -1, r: 180, sX: -0.5, sY: -0.5 }, { b: 9000, d: 500, o: 1, r: 180, sX: 0.5, sY: 0.5 }, { b: 9500, d: 500, o: -1, r: 180, sX: 9, sY: 9 }]
+            ];
+
+            var jssor_1_options = {
+                $AutoPlay: true,
+                $SlideEasing: $Jease$.$InOutSine,
+                $CaptionSliderOptions: {
+                    $Class: $JssorCaptionSlideo$,
+                    $Transitions: jssor_1_SlideoTransitions,
+                    $Breaks: [
+                        [{ d: 3000, b: 8000, t: 2 }],
+                        [{ d: 2000, b: 5000 }],
+                        [{ d: 3000, b: 9500, t: 2 }]
+                    ]
+                },
+                $ArrowNavigatorOptions: {
+                    $Class: $JssorArrowNavigator$
+                },
+                $BulletNavigatorOptions: {
+                    $Class: $JssorBulletNavigator$
+                }
+            };
+
+            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+            /*responsive code begin*/
+            /*you can remove responsive code if you don't want the slider scales while window resizing*/
+            function ScaleSlider() {
+                var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
+                if (refSize) {
+                    refSize = Math.min(refSize, 3000);
+                    jssor_1_slider.$ScaleWidth(refSize);
+                }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            }
+            ScaleSlider();
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+            /*responsive code end*/
+        });
+    </script>
+
+
+
+}
+<style type="text/css" media="screen and (max-width:959px)">
+     .ftco-section {
+        padding: 15px;
+        position: relative;       
+        
+        margin-top: 5px;
+    }
+</style>
+<style type="text/css" media="screen and (min-width:960px)">
+     .ftco-section {
+        padding: 15px;
+        position: relative;       
+        margin-left: 110px;   
+        margin-top: 5px;
+    }
+</style>
+<style>
+
+
+    .services {
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+
+        .services .icon {
+            line-height: 1.3;
+            position: relative;
+            z-index: 0;
+        }
+
+            .services .icon span {
+                font-size: 70px;
+                color: #fff;
+            }
+
+        .services .media-body {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+            .services .media-body h3 {
+                font-size: 18px;
+                font-weight: 500;
+                color: #fff;
+            }
+
+   
+
+    .ftco-section-1 {
+        padding: 15px;
+        position: relative;
+        margin-top: 5px;
+    }
+
+    .d-flex {
+        display: -webkit-box !important;
+        display: -ms-flexbox !important;
+        display: flex !important;
+    }
+
+    .block-6 {
+        margin-bottom: 20px;
+    }
+
+        .block-6 .media-body p {
+            font-size: 16px;
+        }
+
+    .d-block {
+        display: block !important;
+    }
+
+    .media {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+
+
+    *, *::before, *::after {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .bg-primary {
+        background: #6B8E23 !important;
+    }
+
+    .services .media-body {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .media-body {
+        -ms-flex: 1;
+        flex: 1;
+    }
+
+    .services .media-body h3 {
+        font-size: 18px;
+        font-weight: 500;
+        color: #fff;
+    }
+
+    .mb-3, .my-3 {
+        margin-bottom: 1rem !important;
+    }
+
+    .icon img {
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        background: #fff;
+    }
+
+    .fadeInUp {
+        -webkit-animation-name: fadeInUp;
+        animation-name: fadeInUp;
+    }
+
+    .d {
+        -webkit-animation-duration: .5s;
+        animation-duration: .5s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    .ftco-no-pt {
+        padding-top: 0;
+    }
+
+    .jssorb05 {
+        position: absolute;
+    }
+
+        .jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
+            position: absolute;
+            /* size of bullet elment */
+            width: 16px;
+            height: 16px;
+            background: url('Images/b05.png') no-repeat;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .jssorb05 div {
+            background-position: -7px -7px;
+        }
+
+            .jssorb05 div:hover, .jssorb05 .av:hover {
+                background-position: -37px -7px;
+            }
+
+        .jssorb05 .av {
+            background-position: -67px -7px;
+        }
+
+        .jssorb05 .dn, .jssorb05 .dn:hover {
+            background-position: -97px -7px;
+        }
+
+    /* jssor slider arrow navigator skin 22 css */
+    /*
+        .jssora22l                  (normal)
+        .jssora22r                  (normal)
+        .jssora22l:hover            (normal mouseover)
+        .jssora22r:hover            (normal mouseover)
+        .jssora22l.jssora22ldn      (mousedown)
+        .jssora22r.jssora22rdn      (mousedown)
+        .jssora22l.jssora22lds      (disabled)
+        .jssora22r.jssora22rds      (disabled)
+        */
+    .jssora22l, .jssora22r {
+        display: block;
+        position: absolute;
+        /* size of arrow element */
+        width: 40px;
+        height: 58px;
+        cursor: pointer;
+        background: url('Images/a225.png') center center no-repeat;
+        overflow: hidden;
+    }
+
+    .jssora22l {
+        background-position: -10px -31px;
+    }
+
+    .jssora22r {
+        background-position: -70px -31px;
+    }
+
+    .jssora22l:hover {
+        background-position: -130px -31px;
+    }
+
+    .jssora22r:hover {
+        background-position: -190px -31px;
+    }
+
+    .jssora22l.jssora22ldn {
+        background-position: -250px -31px;
+    }
+
+    .jssora22r.jssora22rdn {
+        background-position: -310px -31px;
+    }
+
+    .jssora22l.jssora22lds {
+        background-position: -10px -31px;
+        opacity: .3;
+        pointer-events: none;
+    }
+
+    .jssora22r.jssora22rds {
+        background-position: -70px -31px;
+        opacity: .3;
+        pointer-events: none;
+    }
+
+
+    .mb-4, .my-4 {
+        margin-bottom: 1.5rem !important;
+    }
+
+    .mt-4, .my-4 {
+        margin-top: 1.5rem !important;
+    }
+
+    ul {
+        display: block;
+        list-style-type: disc;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 40px;
+    }
+
+
+    *, *::before, *::after {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+
+    .btn:not(:disabled):not(.disabled) {
+        cursor: pointer;
+    }
+
+    .btn {
+        cursor: pointer;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        border-radius: 3px;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    .block-7 {
+        margin-bottom: 30px;
+        padding: 30px;
+        background: #fff;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        border-radius: 10px;
+    }
+
+        .block-7 .heading {
+            font-size: 25px;
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .block-7 .heading-2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: #1162fb;
+        }
+
+        .block-7 .price {
+            margin: 0;
+            padding: 0;
+            display: block;
+        }
+
+            .block-7 .price sup {
+                font-size: 24px;
+                top: -1em;
+                color: #1162fb;
+            }
+
+            .block-7 .price .number {
+                font-size: 50px;
+                font-weight: 500;
+                color: #1162fb;
+            }
+
+        .block-7 .excerpt {
+            margin-bottom: 20px;
+            color: #999999;
+        }
+
+        .block-7 .label2 {
+            text-transform: uppercase;
+        }
+
+        .block-7 .pricing-text, .block-7 .pricing-text li {
+            padding: 0;
+            margin: 0;
+        }
+
+            .block-7 .pricing-text li {
+                list-style: none;
+                margin-bottom: 15px;
+                color: #4d4d4d;
+            }
+
+        .block-7 .btn-primary {
+            color: #fff;
+            border: transparent;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+
+
+        .block-7.active {
+            background: #006453;
+        }
+
+            .block-7.active .heading {
+                color: #fff;
+            }
+
+            .block-7.active .heading-2 {
+                color: #fff;
+            }
+
+            .block-7.active .price {
+                margin: 0;
+                padding: 0;
+                display: block;
+            }
+
+                .block-7.active .price sup {
+                    color: #fff;
+                }
+
+                .block-7.active .price .number {
+                    color: #fff;
+                }
+
+            .block-7.active .excerpt {
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            .block-7.active .pricing-text li {
+                color: rgba(255, 255, 255, 0.9);
+            }
+
+            .block-7.active .btn-primary {
+                color: #000000 !important;
+                background: #fff !important;
+            }
+
+                .block-7.active .btn-primary:hover, .block-7.active .btn-primary:focus {
+                    background: #fff !important;
+                    color: #000000 !important;
+                }
+</style>

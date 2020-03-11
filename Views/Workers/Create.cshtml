@@ -1,0 +1,39 @@
+﻿@model KisaanMart.Data.Models.Worker
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h1>Add new worker</h1>
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPhoneNo" class="control-label"></label>
+                <input asp-for="UserPhoneNo" class="form-control" />
+                <span asp-validation-for="UserPhoneNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-primary">Back to workforce list</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+    <div>
+        
+    </div>
+

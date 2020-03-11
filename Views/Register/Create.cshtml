@@ -1,0 +1,43 @@
+﻿@model KisaanMart.Data.Models.TempUser
+
+@{
+    ViewData["Title"] = "Register User";
+}
+
+
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h4>Registration Page</h4>
+        <form asp-action="Create" asp-controller="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label">User Name</label>
+                <input asp-for="UserName" class="form-control" id="userName" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPhoneNo" class="control-label">Phone Number</label>
+                <input asp-for="UserPhoneNo" class="form-control" placeholder="+91" id="phoneNo" />
+                <span asp-validation-for="UserPhoneNo" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="divOTP" style="display:none;">
+                <label asp-for="RandOTP" class="control-label">OTP</label>
+                <input asp-for="RandOTP" class="form-control" />
+                <span asp-validation-for="RandOTP" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="registerSection">
+                <input type="submit" value="Register" class="btn btn-primary" id="registerUser" name="submitUser" />
+                @*<input type="submit" value="Register as moderator" class="btn btn-primary" id="registerModerator" name="submitModerator" />*@
+            </div>
+            <div class="form-group" style="display:none;" id="OTPSection">
+                <span>Enter the OTP sent to mobile number</span>
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>

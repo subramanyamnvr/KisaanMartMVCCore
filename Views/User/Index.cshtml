@@ -1,0 +1,42 @@
+﻿@model IEnumerable<KisaanMart.Data.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Manage Users</h1>
+
+<p>
+    <a  class="btn btn-info" asp-action="Create">Add New User</a>
+</p>
+<table class="table table-light">
+    <thead style="background-color: slategray;color: white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserPhoneNo)
+            </th>            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserPhoneNo)
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-info">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

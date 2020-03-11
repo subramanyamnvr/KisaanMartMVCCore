@@ -1,0 +1,414 @@
+﻿@model KisaanMart.Data.Models.Transaction
+
+@{
+    ViewData["Title"] = "Create";
+    List<SelectListItem> PurposeItems= new List<SelectListItem>();
+   PurposeItems.Add(new SelectListItem
+        {
+          Text = "Ploughing",
+          Value = "Ploughing"
+        });
+   PurposeItems.Add(new SelectListItem
+        {
+            Text = "Agriculture",
+            Value = "Ploughing"
+            
+        });
+   PurposeItems.Add(new SelectListItem
+        {
+            Text = "Seeding",
+            Value = "Seeding"
+        });
+}
+
+
+
+
+<hr />
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-8">
+        <h1>Request for new Machine</h1>
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @if (User.IsInRole("Moderator"))
+                {
+                    <div class="form-group">
+                        <label asp-for="behalfuserId" class="control-label"></label>
+                        <input asp-for="behalfuserId" class="form-control" id="behalfuserId" style="display:none"/>
+                        <select id="behalfUsersList" class="form-control col-5">
+                            
+                        </select>
+                        <span asp-validation-for="behalfuserId" class="text-danger"></span>
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <label class="control-label">Select from machines available</label>
+                <select id="selectedMachine" class="form-control col-5">
+                    <option disabled selected>--- Select Machine ---</option>
+                </select>
+                <div id="machineImage"></div>
+                <div class="row">
+
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Purpose" class="control-label"></label>
+                @*<input asp-for="MachineDescription" class="form-control" />*@
+                @*<textarea asp-for="Purpose" class="form-control" rows="3" cols="40"></textarea>*@
+                <select id="Purpose" class="form-control col-5" asp-for="Purpose" asp-items="PurposeItems">
+                    <option disabled selected>--- Select Purpose of request ---</option>
+                </select>
+                <span asp-validation-for="Purpose" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control col-5" id="StartDate" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+                <div id="raindiv" style="margin-top:30px; display:none;">
+                    <img class="imgWeather" src="~/Images/Rainfall.jpg" style="height:110px;" alt="weather" />
+
+                    <ul>
+                        <li class="headPart"><label id="raindt"></label></li>
+                        <li class="headPart">Hyderabad - IN</li>
+                        <li class="Temp headPart">23.13&#x00b0; C</li>
+                        <li class="headPart">Heavy Rain</li>
+                    </ul>
+                    <span style="color:greenyellow">There is chance of heavy rain for selected date. We suggest to postone your activity</span>
+                </div>
+
+
+                <div id="winddiv" style="margin-top:30px; display:none;">
+                    <img class="imgWeather" src="~/Images/Wind.png" style="height:110px;" alt="weather" />
+                    <ul>
+                        <li class="headPart"><label id="winddt"></label></li>
+                        <li class="headPart">Hyderabad - IN</li>
+                        <li class="Temp headPart">24.27&#x00b0; C</li>
+                        <li class="headPart">Windy 25-35 mph</li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control col-5" id="EndDate"/>
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="searchButton">
+                <input type="button" id="searchMachine" value="Search" class="btn btn-primary" />
+                
+            </div>
+            <div class="form-group" id="sectionUserMachineTable">
+                <table id="requestMachineTable" style="width:100%;display:none" class="table table-light table-bordered ">
+                    <thead style="background-color: slategray;color: white;">
+                        <tr>
+                            <th>MachineId</th>
+                            <th>Machine Name</th>
+                            <th>Provider Phone No</th>
+                            <th>Amount per hour</th>
+                            <th>Amount per acre</th>
+                            <th>Distance from your place in Km</th>
+                            <th>Machine Select</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div id="sectionRequestMachine" style="display:none">
+                <div class="form-group" id="sectionUserMachineId">
+                    <label asp-for="UserMachineId" class="control-label"></label>
+                    <select asp-for="UserMachineId" class="form-control col-5" asp-items="ViewBag.UserMachineId" id="UserMachineId"></select>
+
+                </div>
+                <div class="form-group" id="sectionRequestedUser">
+                    <label asp-for="requesteduserId" class="control-label"></label>
+                    <input asp-for="requesteduserId" id="requesteduserId" class="form-control col-5" />
+                    <span asp-validation-for="requesteduserId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    Amount per Acre for selected: <input class="form-control col-5" id="AmountperAcreforselected" />
+                    Amount per Hour for selected: <input class="form-control col-5" id="AmountperHourforselected" />
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="NoOfHours" class="control-label"></label>
+                    <input asp-for="NoOfHours" class="form-control col-5" id="NoOfHours" />
+                    <span asp-validation-for="NoOfHours" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NoOfAcres" class="control-label"></label>
+                    <input asp-for="NoOfAcres" class="form-control col-5 " id="NoOfAcres" />
+                    <span asp-validation-for="NoOfAcres" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TotalAmountToBePaid" class="control-label"></label>
+                    <input asp-for="TotalAmountToBePaid" class="form-control col-5" id="TotalAmountToBePaid" />
+                    <span asp-validation-for="TotalAmountToBePaid" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value="Create Request" class="btn btn-primary" />
+                    <a class="btn btn-primary" asp-action="Index">Go to dashboard</a>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<div>
+    
+</div>
+
+@section Scripts {
+    <script>
+        var selectedMachine;
+        $(document).ready(function () {
+            if ($("#requesteduserId").val() != "") {
+                SelectUserMachine($("#UserMachineId").val());
+            }
+            $("#StartDate").change(function () {
+                ShowWeather();
+            });
+
+                var data = [];
+
+                $.getJSON("/Machines/GetMachines", null, function (data) {
+                    data = $.map(data, function (item, a) {
+                        return "<option value=" + item.Value + ">" + item.Text + "</option>";
+                    });
+                     $("#selectedMachine").html(data.join(""));
+                    $("#selectedMachine").prepend("<option value='Select machine' selected='selected'></option>");
+                });
+            $.getJSON("/Transactions/GetModeratorUsers", null, function (data) {
+                data = $.map(data, function (item, a) {
+                    return "<option value=" + item.Value + ">" + item.Text + "</option>";
+                })
+                $("#behalfUsersList").html(data.join(""));
+                    $("#behalfUsersList").prepend("<option selected='selected'>Select User</option>");
+            });
+            $("#selectedMachine").change(function () {
+                 selectedMachine = $("#selectedMachine").val();
+                //alert(selectedMachine);       
+                //machineImage
+                    $.ajax({
+            type: 'GET',
+              url: "/Transactions/RenderImage?id=" + selectedMachine,            
+           datatype: 'json',
+                        success: function (response) {
+                    var imag = "<img style='width:90px;height:90px;' "+ "src='" + "data:image/jpg;base64,"+ response.base64imgage + "'/>";
+ 
+            $("#machineImage").html(imag)
+                    //console.log(response);
+
+                    //$("#machineImage").val(response);
+
+           },
+           error: function (msg) {
+               //alert(msg.responseText);
+           }
+       });
+                
+                
+                
+            });
+            
+            $("#behalfUsersList").change(function () {
+                var behalfUser = $("#behalfUsersList").val();
+                //alert(behalfUser);       
+                $("#behalfuserId").show();
+                $("#behalfuserId").val(behalfUser);
+                $("#behalfuserId").hide();
+            });
+                    $("#NoOfHours").change(function () {
+                        var noOfHours = $("#NoOfHours").val();
+                        var amountPerHourSelected = $("#AmountperHourforselected").val()
+                        var TotalAmount = "";
+                        if (noOfHours != "") {
+                            TotalAmount = noOfHours * amountPerHourSelected;
+                            $("#TotalAmountToBePaid").val(TotalAmount);
+                            $("#NoOfAcres").attr("disabled", true);
+                        }
+
+                    });
+            $("#NoOfAcres").change(function () {
+                        var noOfAcres = $("#NoOfAcres").val();
+                        var amountPerHourSelected = $("#AmountperAcreforselected").val()
+                        var TotalAmount = "";
+                        if (noOfAcres != "") {
+                            TotalAmount = noOfAcres * amountPerHourSelected;
+                            $("#TotalAmountToBePaid").val(TotalAmount);
+                            $("#NoOfHours").attr("disabled", true);
+                        }
+
+                    });
+
+
+                $("#searchMachine").click(function () {
+                    var selectedMachineId = $("#selectedMachine").val();
+                    var startDate = $("#StartDate").val();
+                    var endDate = $("#EndDate").val();
+                    //alert(selectedMachineId);
+                    if (selectedMachineId != null) {
+                        $("#requestMachineTable").show();
+                        $("#requestMachineTable").DataTable({
+                            "processing": true, // for show progress bar
+                            "serverSide": true, // for process server side
+                            "filter": false, // this is for disable filter (search box)
+                            "orderMulti": false, // for disable multiple column at once
+                            destroy: true,
+                            "ajax": {
+                                "url": "/UserMachines/LoadDataForSelectedMachine?selectedMachineId=" + selectedMachineId+"&StartDate="+startDate+"&EndDate="+endDate,
+                                "type": "POST",
+                                "datatype": "json"
+
+                            },
+                            "columnDefs":
+                                [{
+                                    "targets": [0],
+                                    "visible": false,
+                                    "searchable": false
+                                }],
+                            "columns": [
+                                { "data": "MachineId" },
+                                { "data": "MachineName" },
+                                { "data": "UserPhoneNo" },
+                                { "data": "AmountPerHour" },
+                                { "data": "AmountPerAcre" },
+                                { "data": "Distance" },
+                                {
+
+                                   data: null, render: function (data, type, row)
+                                    {
+                                    return "<a href='#' class='btn btn-danger' onclick=SelectUserMachine('" + data.MachineId + "'); >Select</a>" ;
+                                       }
+
+
+                                },
+
+
+                            ]
+
+                        });
+                    }
+
+
+                });
+
+        });
+        function ShowWeather() {
+            var strDate = $("#StartDate").val();
+            var strday = strDate.split('-')[2];
+            var crtdate = strDate.split('-')[2] + "-" + strDate.split('-')[1] + "-" + strDate.split('-')[0];
+            if (strday % 2 == 0) {
+                $("#winddiv").hide();
+                $("#raindiv").show();
+                $("#raindt").html(crtdate);
+
+            }
+            else {
+                $("#winddiv").show();
+                $("#raindiv").hide();
+                $("#winddt").html(crtdate);
+            }
+
+        }
+
+        function setRequestedBy() {
+                $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetCurrentUser", "Transactions")',
+           datatype: 'json',
+                success: function (response) {
+                    //console.log(response);
+
+                    $("#requesteduserId").val(response.data.Id);
+
+           },
+           error: function (msg) {
+               //alert(msg.responseText);
+           }
+       });
+        }
+
+
+        function SelectUserMachine(userMachineId) {
+            //alert(userMachineId);
+            setRequestedBy();
+            $("#searchButton").hide();
+            getUserMachineDetails(userMachineId)
+            $("#sectionRequestMachine").show();
+            $("#sectionUserMachineId").hide()
+            $("#sectionRequestedUser").hide()
+
+
+        }
+        function getUserMachineDetails(usermachineId) {
+            $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetUserMachineDetails", "UserMachines")',
+           data: { usermachineId: usermachineId },
+           datatype: 'json',
+                success: function (response) {
+                    console.log(response);
+                    //alert(response.data[0].AmountPerAcre);
+                    $("#sectionUserMachineTable").hide();
+                    $("#UserMachineId").val(usermachineId);
+                    $("#AmountperAcreforselected").val(response.data[0].AmountPerAcre);
+                    $("#AmountperHourforselected").val(response.data[0].AmountPerHour);
+                    $("#AmountperAcreforselected").attr("disabled", true);
+                    $("#AmountperHourforselected").attr("disabled", true);
+
+
+           },
+           error: function (msg) {
+               alert(msg.responseText);
+           }
+       });
+
+        }
+
+
+
+
+    </script>
+}
+<style type="text/css">
+    .Temp {
+        font-size: 20px;
+        font-weight: bold;
+        color: blue;
+    }
+
+    .imgWeather {
+        float: left;
+    }
+
+    .Weather {
+        font-size: 20px;
+        color: black;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    .headPart {
+        width: 280px;
+        color: black;
+        background-color: #ffffff;
+        padding-left: 3px;
+        /*background-color: #b3c6ff;*/
+    }
+
+    ul {
+        list-style-type: none;
+    }
+</style>
+

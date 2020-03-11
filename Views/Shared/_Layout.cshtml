@@ -1,0 +1,214 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title style="font-family:Algerian;font-weight:bold;font-style:italic">@ViewData["Title"] - Kisaanvaradhi</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+        @*<link href="~/lib/font-awesome/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/lib/font-awesome/css/responsive.bootstrap.css" rel="stylesheet" />*@
+        <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+
+        <link href="~/css/slick.css" rel="stylesheet" />
+        <link href="~/css/slick-theme.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="Development">
+        @*<link href="~/lib/font-awesome/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/lib/font-awesome/css/responsive.bootstrap.css" rel="stylesheet" />*@
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+        <link href="~/css/slick.css" rel="stylesheet" />
+
+        <link href="~/css/slick-theme.css" rel="stylesheet" />
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/Images/KisaanTractor.png" alt="Company logo" width="30" height="30" />
+                    Kisaanvaradhi
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index"><span class="fa fa-home"></span> Home</a>
+                        </li>
+                        @*@if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Register" asp-action="Create">Register</a>
+                            </li>
+                        }*@
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        }
+                        @*@if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Machines" asp-action="Index">Machines info</a>
+                                </li>
+                            }*@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="UserMachines" asp-action="Create">Rent machinery</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Transactions" asp-action="Create">Request machinery</a>
+                            </li>
+                        }
+
+
+                        @if (User.IsInRole("Moderator"))
+                        {
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Index">Manage my users</a>
+                                </li>
+                            }
+
+                        }
+                        @if (User.IsInRole("Moderator"))
+                        {
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Workers" asp-action="Index">Manage workforce</a>
+                                </li>
+                                <li class="nav-item">
+                                    
+                                    @*<a class="nav-link text-light" asp-area="" asp-controller="Workers" asp-action="Index">Manage workforce</a>*@
+                                </li>
+                            }
+                        }
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdow ml-auto">
+                                <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
+                                    @if (@HttpContextAccessor.HttpContext.Session.GetString("UserName") == "")
+                                    {
+                                        @HttpContextAccessor.HttpContext.Session.GetString("UserPhoneNo")
+                                    }
+                                    else
+                                    {
+                                        @HttpContextAccessor.HttpContext.Session.GetString("UserName")
+                                    }
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right position-absolute" aria-labelledby="navbarDropdown">
+                                    @if (User.IsInRole("Moderator"))
+                                    {
+                                        <span class="dropdown-item">My Credits: @HttpContextAccessor.HttpContext.Session.GetString("AccumulatedPoints")</span>
+                                    }
+                                        <a class="dropdown-item" asp-controller="Transactions" asp-action="Index">My Dashboard</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Edit">Edit Profile</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" asp-action="Logout" asp-controller="Account"><span class="fa fa-sign-out"></span>Logout</a>
+                                    </div>
+                            </li>
+                        }
+
+
+                    </ul>
+
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    @*<div class="container">*@
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+
+    <environment include="Development">
+
+        @*<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.1/build/ol.js"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>*@
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/lib/font-awesome/js/all.js"></script>
+        <script src="~/lib/font-awesome/js/ol.js"></script>
+        <script src="~/lib/font-awesome/js/datatables.js"></script>
+        <script src="~/lib/font-awesome/js/bootstrap.js"></script>
+
+        <script src="~/js/modernizr.custom.86080.js"></script>
+
+        <script src="~/js/jssor.slider-22.0.15.mini.js"></script>
+
+
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/lib/font-awesome/js/all.js"></script>
+        <script src="~/lib/font-awesome/js/ol.js"></script>
+        <script src="~/lib/font-awesome/js/datatables.js"></script>
+        <script src="~/lib/font-awesome/js/bootstrap.js"></script>
+        <script src="~/js/jssor.slider-22.0.15.mini.js"></script>
+        @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+        </script>
+            <script src="~/js/slick.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA539-QF6dD_AwTfXKajrXLn7zgQgymO8Y" crossorigin="anonymous">*@
+
+       
+
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+<style>
+    body {
+        background-image: linear-gradient(to bottom, rgba(0, 100, 0, 0.32), rgba(0, 150, 0, 0.73)),url('../Images/KisaanImg.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        margin: 0px;
+        color: white;
+    }
+</style>
+

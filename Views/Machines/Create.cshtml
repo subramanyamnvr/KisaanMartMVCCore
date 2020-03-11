@@ -1,0 +1,49 @@
+﻿@model KisaanMart.Data.Models.Machine
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+
+<hr />
+<div class="row">    
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h1>Add New Machine Info</h1>
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MachineName" class="control-label"></label>
+                <input asp-for="MachineName" class="form-control" />
+                <span asp-validation-for="MachineName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MachineDescription" class="control-label"></label>
+                @*<input asp-for="MachineDescription" class="form-control" />*@
+                <textarea asp-for="MachineDescription" class="form-control" rows="5" cols="40"></textarea>
+                <span asp-validation-for="MachineDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none;">
+                <label asp-for="MachineImage" class="control-label"></label>
+                @*<input asp-for="MachineImage" class="form-control" />*@
+                <span asp-validation-for="MachineImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MachineImage" class="control-label"></label>
+                <input type="file" name="MachineImage" id="MachineImage" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+    <div>
+        <a class="btn btn-primary" asp-action="Index">Back to Machines List</a>
+    </div>
+
