@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KisaanMart.Migrations
 {
-    public partial class intial : Migration
+    public partial class IntialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,7 +31,7 @@ namespace KisaanMart.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserPhoneNo = table.Column<string>(nullable: true),
-                    UserPassword = table.Column<string>(nullable: true),
+                    OTP = table.Column<int>(nullable: false),
                     Role = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -60,8 +60,10 @@ namespace KisaanMart.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserName = table.Column<string>(nullable: true),
                     UserPhoneNo = table.Column<string>(nullable: false),
-                    UserPassword = table.Column<string>(nullable: true),
+                    Latitude = table.Column<double>(nullable: false),
+                    Longitude = table.Column<double>(nullable: false),
                     IsModerator = table.Column<bool>(nullable: true),
                     RandOTP = table.Column<int>(nullable: true)
                 },
@@ -94,17 +96,31 @@ namespace KisaanMart.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserName = table.Column<string>(nullable: true),
                     UserPhoneNo = table.Column<string>(nullable: false),
-                    UserPassword = table.Column<string>(nullable: true),
                     IsActive = table.Column<bool>(nullable: true),
                     Role = table.Column<string>(nullable: true),
                     Latitude = table.Column<double>(nullable: false),
                     Longitude = table.Column<double>(nullable: false),
                     ModeratorId = table.Column<int>(nullable: false),
-                    PointsAccumulated = table.Column<int>(nullable: false)
+                    PointsAccumulated = table.Column<int>(nullable: false),
+                    RandOTP = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Workers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserName = table.Column<string>(nullable: false),
+                    UserPhoneNo = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Workers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -115,6 +131,7 @@ namespace KisaanMart.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AmountPerHour = table.Column<double>(nullable: false),
                     AmountPerAcre = table.Column<double>(nullable: false),
+                    Distance = table.Column<int>(nullable: false),
                     userId = table.Column<int>(nullable: false),
                     MachineId = table.Column<int>(nullable: false)
                 },
@@ -143,12 +160,13 @@ namespace KisaanMart.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
+                    Purpose = table.Column<string>(nullable: true),
                     NoOfHours = table.Column<int>(nullable: false),
                     NoOfAcres = table.Column<int>(nullable: false),
                     TotalAmountToBePaid = table.Column<double>(nullable: false),
                     UserMachineId = table.Column<int>(nullable: false),
                     requesteduserId = table.Column<int>(nullable: false),
-                    behalfuserId = table.Column<int>(nullable: false)
+                    behalfuserId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -193,6 +211,9 @@ namespace KisaanMart.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserMachineViewModel");
+
+            migrationBuilder.DropTable(
+                name: "Workers");
 
             migrationBuilder.DropTable(
                 name: "UserMachines");

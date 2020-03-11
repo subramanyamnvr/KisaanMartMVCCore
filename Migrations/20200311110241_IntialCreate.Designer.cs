@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KisaanMart.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20191017081358_worker")]
-    partial class worker
+    [Migration("20200311110241_IntialCreate")]
+    partial class IntialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -65,9 +65,13 @@ namespace KisaanMart.Migrations
 
                     b.Property<bool?>("IsModerator");
 
+                    b.Property<double>("Latitude");
+
+                    b.Property<double>("Longitude");
+
                     b.Property<int?>("RandOTP");
 
-                    b.Property<string>("UserPassword");
+                    b.Property<string>("UserName");
 
                     b.Property<string>("UserPhoneNo")
                         .IsRequired();
@@ -89,13 +93,15 @@ namespace KisaanMart.Migrations
 
                     b.Property<int>("NoOfHours");
 
+                    b.Property<string>("Purpose");
+
                     b.Property<DateTime>("StartDate");
 
                     b.Property<double>("TotalAmountToBePaid");
 
                     b.Property<int>("UserMachineId");
 
-                    b.Property<int>("behalfuserId");
+                    b.Property<int?>("behalfuserId");
 
                     b.Property<int>("requesteduserId");
 
@@ -122,15 +128,14 @@ namespace KisaanMart.Migrations
 
                     b.Property<int>("PointsAccumulated");
 
+                    b.Property<int?>("RandOTP");
+
                     b.Property<string>("Role");
 
                     b.Property<string>("UserName");
 
-                    b.Property<string>("UserPassword");
-
                     b.Property<string>("UserPhoneNo")
-                        .IsRequired()
-                        .HasMaxLength(13);
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -146,6 +151,8 @@ namespace KisaanMart.Migrations
                     b.Property<double>("AmountPerAcre");
 
                     b.Property<double>("AmountPerHour");
+
+                    b.Property<int>("Distance");
 
                     b.Property<int>("MachineId");
 
@@ -166,20 +173,15 @@ namespace KisaanMart.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Latitude");
-
-                    b.Property<string>("Longitude");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("PhoneNo")
+                    b.Property<string>("UserName")
                         .IsRequired();
 
-                    b.Property<double>("WagePerDay");
+                    b.Property<string>("UserPhoneNo")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.ToTable("Worker");
+                    b.ToTable("Workers");
                 });
 
             modelBuilder.Entity("KisaanMart.ViewModels.LoginViewModel", b =>
@@ -188,9 +190,9 @@ namespace KisaanMart.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Role");
+                    b.Property<int>("OTP");
 
-                    b.Property<string>("UserPassword");
+                    b.Property<string>("Role");
 
                     b.Property<string>("UserPhoneNo");
 
