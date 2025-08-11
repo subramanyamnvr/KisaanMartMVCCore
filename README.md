@@ -17,6 +17,15 @@ Transactions - Request machines (Add machines dd,show machine data in table for 
  - Add PWA support and check in mobile
 - Documentation and presentation prep
 
+## Documentation
+
+Comprehensive API and component docs are now available under `docs/`:
+- Controllers and endpoints: `docs/Controllers.md`
+- Models: `docs/Models.md`
+- View Models: `docs/ViewModels.md`
+- Utilities: `docs/Utilities.md`
+- Authentication: `docs/Authentication.md`
+- Examples: `docs/Examples.md`
 
 - Change name to Kisaan vaaradhi 
 - Add workers screen with crud
